@@ -85,15 +85,20 @@ def project_heading(X: Tensor) -> Tensor:
     rollout, ensuring the physics loss computes derivatives at states
     that correspond to actual heading angles.
 
-    X : (..., 9) state tensor — modified in-place on a clone.
+    X : (..., 9) state tensor. Returns a new tensor (no in-place ops).
     """
-    X = X.clone()
-    cos_psi = X[..., 3]
-    sin_psi = X[..., 4]
+    cos_psi = X[..., 3:4]
+    sin_psi = X[..., 4:5]
     norm = torch.sqrt(cos_psi ** 2 + sin_psi ** 2 + 1e-8)
-    X[..., 3] = cos_psi / norm
-    X[..., 4] = sin_psi / norm
-    return X
+    cos_proj = cos_psi / norm
+    sin_proj = sin_psi / norm
+    # Build new tensor from slices — no index assignment
+    return torch.cat([
+        X[..., :3],       # x, y, z
+        cos_proj,         # cos(psi) projected
+        sin_proj,         # sin(psi) projected
+        X[..., 5:],       # u, v, w, r
+    ], dim=-1)
 
 
 # ===================================================================
