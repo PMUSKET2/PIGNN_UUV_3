@@ -1,5 +1,7 @@
 # Physics-Informed Graph Neural Network (PIGNN) for BlueROV2 Dynamics
 
+READ FIRST- for reviewing the final project you'll want to download the "pignn_pipeline_v4_noroll_(4).ipynb" file in the main branch of this repository. This will take you to the most updated Version 4 edition of the model. You can also feel free to download the "pignn_pipeline_v3_eval_(2).ipynb" which will run the evaluation for the previous version. Both of these reference pre-saved weights that have been posted to this repository's release section. All you've have to do is run the file in Google Collab for the results to load. 
+
 This project implements a **heterogeneous Physics-Informed Graph Neural Network** to model the 4-DOF dynamics of a BlueROV2 Heavy underwater vehicle.  It extends the [PINC](https://github.com/eivacom/pinc-xyz-yaw) codebase by replacing the feedforward DNN with a GNN whose graph topology encodes the physical subsystem structure of the vehicle.
 
 ## Architecture
@@ -124,7 +126,6 @@ The 4-DOF Fossen model (surge, sway, heave, yaw):
 
 ## References
 
-- Fossen, T.I. (2011). *Handbook of Marine Craft Hydrodynamics and Motion Control*
 - PINC repository: https://github.com/eivacom/pinc-xyz-yaw
 - ConFIG gradient method: https://github.com/tum-pbs/ConFIG
 
